@@ -583,35 +583,33 @@ function createWidget(id, title, content) {
             ${content}
         </div>
         <div class="code-preview" style="display: none;">
-            <div class="code-buttons">
-                <button class="code-btn html-btn" style="background: #e34c26; color: white;">
-                    <span class="lang-icon">🌐</span> HTML
-                </button>
-                <button class="code-btn css-btn" style="background: #264de4; color: white;">
-                    <span class="lang-icon">🎨</span> CSS
-                </button>
-                <button class="code-btn js-btn" style="background: #f7df1e; color: black;">
-                    <span class="lang-icon">⚡</span> JavaScript
-                </button>
+            <div class="code-section">
+                <h4>HTML</h4>
+                <pre class="preview-code-html"></pre>
+                <button class="copy-btn-html">Копировать HTML</button>
             </div>
-            <pre class="code-content" style="display: none;"></pre>
+            <div class="code-section">
+                <h4>CSS</h4>
+                <pre class="preview-code-css"></pre>
+                <button class="copy-btn-css">Копировать CSS</button>
+            </div>
+            <div class="code-section">
+                <h4>JavaScript</h4>
+                <pre class="preview-code-js"></pre>
+                <button class="copy-btn-js">Копировать JS</button>
+            </div>
         </div>
     `;
 
     const showCodeBtn = widget.querySelector('.show-code-btn');
     const codePreview = widget.querySelector('.code-preview');
-    const codeContent = widget.querySelector('.code-content');
-    const htmlBtn = widget.querySelector('.html-btn');
-    const cssBtn = widget.querySelector('.css-btn');
-    const jsBtn = widget.querySelector('.js-btn');
+    const previewHtml = widget.querySelector('.preview-code-html');
+    const previewCss = widget.querySelector('.preview-code-css');
+    const previewJs = widget.querySelector('.preview-code-js');
+    const copyHtmlBtn = widget.querySelector('.copy-btn-html');
+    const copyCssBtn = widget.querySelector('.copy-btn-css');
+    const copyJsBtn = widget.querySelector('.copy-btn-js');
     let isCodeVisible = false;
-
-    // Подготавливаем код для каждого языка
-    const codes = {
-        html: '',
-        css: '',
-        js: ''
-    };
 
     showCodeBtn.addEventListener('click', () => {
         isCodeVisible = !isCodeVisible;
@@ -622,14 +620,16 @@ function createWidget(id, title, content) {
             const widgetContent = widget.querySelector('.widget-content').innerHTML;
             const currentTheme = document.body.dataset.theme || 'default';
             
-            // Подготавливаем код для каждого языка
-            codes.html = `<div class="widget" data-theme="${currentTheme}">
+            // HTML код
+            const htmlCode = `<div class="widget" data-theme="${currentTheme}">
     <div class="widget-content">
         ${widgetContent}
     </div>
 </div>`;
             
-            codes.css = `.widget {
+            // CSS код
+            const cssCode = `/* Стили для виджета */
+.widget {
     background: var(--surface-color, #ffffff);
     border-radius: var(--border-radius, 12px);
     padding: 20px;
@@ -643,24 +643,54 @@ function createWidget(id, title, content) {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.widget button {
+    background: var(--primary-color, #6200ee);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius, 8px);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.widget button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.widget input {
+    padding: 8px;
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: var(--border-radius, 8px);
+    outline: none;
 }`;
             
-            codes.js = `document.addEventListener('DOMContentLoaded', () => {
+            // JavaScript код
+            const jsCode = `// Инициализация виджета
+document.addEventListener('DOMContentLoaded', () => {
     const widget = document.querySelector('.widget');
     ${getWidgetInitCode(id)}
 });`;
+            
+            previewHtml.textContent = htmlCode;
+            previewCss.textContent = cssCode;
+            previewJs.textContent = jsCode;
         }
     });
 
-    // Функция для копирования кода с анимацией кнопки
+    // Функция для копирования с анимацией кнопки
     async function copyCode(code, button) {
         try {
             await navigator.clipboard.writeText(code);
-            const originalIcon = button.querySelector('.lang-icon').textContent;
-            button.querySelector('.lang-icon').textContent = '✓';
+            const originalText = button.textContent;
+            button.textContent = 'Скопировано!';
+            button.style.backgroundColor = '#4CAF50';
             
             setTimeout(() => {
-                button.querySelector('.lang-icon').textContent = originalIcon;
+                button.textContent = originalText;
+                button.style.backgroundColor = '';
             }, 2000);
         } catch (err) {
             const textArea = document.createElement('textarea');
@@ -669,42 +699,25 @@ function createWidget(id, title, content) {
             textArea.select();
             try {
                 document.execCommand('copy');
-                const originalIcon = button.querySelector('.lang-icon').textContent;
-                button.querySelector('.lang-icon').textContent = '✓';
-                setTimeout(() => {
-                    button.querySelector('.lang-icon').textContent = originalIcon;
-                }, 2000);
+                button.textContent = 'Скопировано!';
+                button.style.backgroundColor = '#4CAF50';
             } catch (err) {
-                button.querySelector('.lang-icon').textContent = '❌';
-                setTimeout(() => {
-                    button.querySelector('.lang-icon').textContent = originalIcon;
-                }, 2000);
+                button.textContent = 'Ошибка!';
+                button.style.backgroundColor = '#f44336';
             }
             document.body.removeChild(textArea);
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.backgroundColor = '';
+            }, 2000);
         }
     }
 
-    // Обработчики для кнопок
-    htmlBtn.addEventListener('click', () => {
-        codeContent.style.display = 'block';
-        codeContent.innerHTML = `<code class="language-html">${codes.html}</code>`;
-        copyCode(codes.html, htmlBtn);
-        Prism.highlightElement(codeContent.querySelector('code'));
-    });
-
-    cssBtn.addEventListener('click', () => {
-        codeContent.style.display = 'block';
-        codeContent.innerHTML = `<code class="language-css">${codes.css}</code>`;
-        copyCode(codes.css, cssBtn);
-        Prism.highlightElement(codeContent.querySelector('code'));
-    });
-
-    jsBtn.addEventListener('click', () => {
-        codeContent.style.display = 'block';
-        codeContent.innerHTML = `<code class="language-javascript">${codes.js}</code>`;
-        copyCode(codes.js, jsBtn);
-        Prism.highlightElement(codeContent.querySelector('code'));
-    });
+    // Обработчики для кнопок копирования
+    copyHtmlBtn.addEventListener('click', () => copyCode(previewHtml.textContent, copyHtmlBtn));
+    copyCssBtn.addEventListener('click', () => copyCode(previewCss.textContent, copyCssBtn));
+    copyJsBtn.addEventListener('click', () => copyCode(previewJs.textContent, copyJsBtn));
     
     return widget;
 }
