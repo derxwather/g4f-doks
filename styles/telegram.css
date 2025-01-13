@@ -1,0 +1,132 @@
+.theme-telegram {
+    --primary-color: #2AABEE;
+    --secondary-color: #229ED9;
+    --surface-color: #ffffff;
+    --background-color: #f0f2f5;
+    --text-color: #000000;
+    --border-radius: 12px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.theme-telegram .widget {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.theme-telegram .widget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.theme-telegram .widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.theme-telegram button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.theme-telegram button:hover {
+    background-color: var(--secondary-color);
+}
+
+.theme-telegram button:active {
+    transform: scale(0.98);
+}
+
+.theme-telegram input[type="number"] {
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 8px;
+    width: 60px;
+    margin: 0 4px;
+    outline: none;
+    background-color: var(--background-color);
+}
+
+.theme-telegram .widget-clock {
+    text-align: center;
+    padding: 20px;
+}
+
+.theme-telegram .widget-clock .time {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.theme-telegram .widget-clock .date {
+    font-size: 1.2em;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-top: 8px;
+}
+
+.theme-telegram .widget-timer .display,
+.theme-telegram .widget-stopwatch .display {
+    font-size: 2em;
+    text-align: center;
+    margin: 16px 0;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.theme-telegram .controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 16px 0;
+    background-color: var(--background-color);
+    padding: 12px;
+    border-radius: var(--border-radius);
+}
+
+.theme-telegram .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.theme-telegram .laps {
+    margin-top: 16px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    padding: 8px;
+}
+
+.theme-telegram .laps div {
+    padding: 8px;
+    margin: 4px 0;
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Добавляем анимации */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.theme-telegram .widget-clock .time {
+    animation: pulse 2s infinite;
+} 
