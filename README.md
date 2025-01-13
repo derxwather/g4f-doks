@@ -53,7 +53,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/your-username/widgets-collection
+git clone https://github.com/derxwather/FASTwidgets
 ```
 
 2. Откройте index.html в браузере
@@ -87,9 +87,10 @@ MIT License - используйте код как хотите!
 
 ## 📞 Контакты
 
-- GitHub: [your-username](https://github.com/your-username)
-- Email: your-email@example.com
+- GitHub: [derxwather](https://github.com/derxwather)
+- Telegram: [@derxwather](https://t.me/derxwather)
+- Email: derxwather@gmail.com
 
 ## 🌟 Понравился проект?
 
-Поставьте звезду на GitHub! 
+Поставьте звезду на GitHub! Проект доступен по адресу: [FASTwidgets](https://github.com/derxwather/FASTwidgets) 
