@@ -3,40 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Awesome Widgets Collection</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/material-you.css">
-    <link rel="stylesheet" href="styles/no-rounded.css">
-    <link rel="stylesheet" href="styles/telegram.css">
+    <title>G4F - Документация</title>
+    <style>
+        :root {
+            --bg-color: #1a1b26;
+            --text-color: #a9b1d6;
+            --accent-color: #7aa2f7;
+            --code-bg: #24283b;
+            --border-color: rgba(255,255,255,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 2em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1em;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--accent-color);
+            margin-top: 1.5em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        details {
+            background: rgba(255,255,255,0.03);
+            padding: 1em;
+            border-radius: 8px;
+            margin: 1em 0;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        summary {
+            cursor: pointer;
+            color: var(--accent-color);
+            font-weight: bold;
+            padding: 0.5em 0;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1em;
+            border-radius: 8px;
+            overflow-x: auto;
+            position: relative;
+            margin: 1em 0;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5em;
+            right: 0.5em;
+            background: var(--accent-color);
+            border: none;
+            color: var(--bg-color);
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        pre:hover .copy-btn {
+            opacity: 1;
+        }
+
+        .theme-switcher {
+            display: flex;
+            gap: 0.5em;
+            flex-wrap: wrap;
+            margin: 1em 0;
+        }
+
+        .theme-btn {
+            background: var(--accent-color);
+            border: none;
+            color: var(--bg-color);
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        details[open] {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .install-section {
+            margin: 2em 0;
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 1em;
+        }
+
+        li {
+            margin: 0.5em 0;
+            position: relative;
+        }
+
+        li:before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: -1em;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Коллекция Виджетов</h1>
+        <h1>🤖 G4F - Бесплатная библиотека для работы с ИИ</h1>
         <div class="theme-switcher">
-            <button class="theme-btn" data-theme="material-you">Material You</button>
-            <button class="theme-btn" data-theme="no-rounded">No Rounded</button>
-            <button class="theme-btn" data-theme="telegram">Telegram</button>
             <button class="theme-btn" data-theme="dark">Тёмная</button>
             <button class="theme-btn" data-theme="light">Светлая</button>
             <button class="theme-btn" data-theme="colorful">Яркая</button>
-            <button class="theme-btn" data-theme="minimal">Минимализм</button>
-            <button class="theme-btn" data-theme="retro">Ретро</button>
-            <button class="theme-btn" data-theme="neon">Неон</button>
         </div>
     </header>
     
-    <main class="widgets-container">
+    <main>
+        <div class="install-section">
+            <h2>📥 Установка</h2>
+            <pre><code>pip install g4f</code><button class="copy-btn">Копировать</button></pre>
+        </div>
+
+        <details>
+            <summary>🚀 Быстрый старт</summary>
+            <h2>Быстрый старт</h2>
+            <p>Простой пример использования с ChatGptEs (самый быстрый провайдер):</p>
+            <pre><code>import g4f
+
+# Устанавливаем провайдера
+g4f.debug.logging = True  # Включаем логи
+provider = g4f.Provider.ChatgptEs 
+
+# Отправляем запрос
+response = g4f.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    provider=provider,
+    messages=[{"role": "user", "content": "Привет, как дела?"}],
+)
+
+print(response)</code><button class="copy-btn">Копировать</button></pre>
+        </details>
+
+        <details>
+            <summary>📚 Подробное описание всех функций</summary>
+            <h3>🔄 Основные функции</h3>
+            <h4>g4f.ChatCompletion.create()</h4>
+            <pre><code>response = g4f.ChatCompletion.create(
+    model="gpt-3.5-turbo",    # Модель для использования
+    provider=provider,         # Провайдер (например ChatgptEs)
+    messages=[                 # Список сообщений
+        {
+            "role": "user",    # Роль: user/assistant/system
+            "content": "текст" # Содержание сообщения
+        }
+    ],
+    stream=True,              # Потоковый вывод
+    temperature=0.7,          # Креативность (0.0-1.0)
+    top_p=0.9,               # Разнообразие ответов
+    max_tokens=2000          # Максимальная длина ответа
+)</code><button class="copy-btn">Копировать</button></pre>
+
+            <h4>g4f.debug</h4>
+            <pre><code>g4f.debug.logging = True           # Включить логирование
+g4f.debug.version = '0.1.5.1'      # Версия библиотеки
+g4f.debug.request_timeout = 30     # Таймаут запросов
+g4f.debug.proxies = {              # Настройка прокси
+    "http": "http://proxy:8080",
+    "https": "https://proxy:8080"
+}</code><button class="copy-btn">Копировать</button></pre>
+        </details>
+
+        <details>
+            <summary>🎨 Генерация изображений</summary>
+            <h3>Основное использование</h3>
+            <pre><code>import g4f
+from g4f.Provider import Bing
+from g4f.Provider.bing.create_images import patch_provider
+
+# Генерация через Bing (самый стабильный)
+response = g4f.ChatCompletion.create(
+    model=g4f.models.default,
+    provider=Bing,
+    messages=[{
+        "role": "user", 
+        "content": "GENERATE IMAGE: Нарисуй котика"
+    }],
+    patch_provider=patch_provider  # Важно!
+)
+
+print(response)  # https://bing.com/create/image/url...</code><button class="copy-btn">Копировать</button></pre>
+
+            <h3>Сохранение изображений</h3>
+            <pre><code>import requests
+
+def save_image(url, filename):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(filename, 'wb') as f:
+            f.write(response.content)
+        print(f"✅ Изображение сохранено как {filename}")
+    else:
+        print("❌ Ошибка при скачивании")
+
+# Пример использования
+save_image(response, "my_image.png")</code><button class="copy-btn">Копировать</button></pre>
+
+            <h3>⚠️ Важные моменты</h3>
+            <ul>
+                <li>Все провайдеры возвращают <strong>ссылку</strong> на изображение</li>
+                <li>Bing требует patch_provider для работы</li>
+                <li>Некоторым провайдерам нужны куки браузера</li>
+                <li>Ссылки временные - сразу сохраняйте картинки</li>
+                <li>Формат запроса: "GENERATE IMAGE: описание"</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>💻 Базовое использование</summary>
+            <pre><code>import g4f
+from g4f.Provider import ChatgptEs
+
+def get_ai_response(prompt: str) -> str:
+    try:
+        response = g4f.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            provider=ChatgptEs,
+            messages=[{"role": "user", "content": prompt}],
+            stream=True  # Включаем стриминг для быстрого ответа
+        )
+        
+        full_response = ""
+        for message in response:
+            full_response += message
+            
+        return full_response
+    except Exception as e:
+        return f"Ошибка: {str(e)}"
+
+# Пример использования
+if __name__ == "__main__":
+    result = get_ai_response("Напиши короткое стихотворение")
+    print(result)</code><button class="copy-btn">Копировать</button></pre>
+        </details>
+
+        <details>
+            <summary>⚠️ Важные нюансы</summary>
+            <ul>
+                <li>Некоторые провайдеры могут работать нестабильно</li>
+                <li>Рекомендуется использовать VPN для надежности</li>
+                <li>ChatGptEs обычно самый быстрый, но может требовать прокси</li>
+                <li>При ошибках проверьте:
+                    <ul>
+                        <li>Подключение к интернету</li>
+                        <li>Доступность провайдера</li>
+                        <li>Правильность запроса</li>
+                        <li>Наличие VPN/прокси</li>
+                    </ul>
+                </li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>📚 Поддерживаемые модели</summary>
+            <ul>
+                <li>gpt-3.5-turbo</li>
+                <li>gpt-4</li>
+                <li>claude-2</li>
+                <li>gemini-pro</li>
+                <li>и другие (зависит от провайдера)</li>
+            </ul>
+        </details>
     </main>
 
-    <div class="code-preview" id="codePreview">
-        <div class="code-preview-header">
-            <h3>Код виджета</h3>
-            <button class="copy-btn">Копировать</button>
-        </div>
-        <pre><code class="preview-code"></code></pre>
-    </div>
+    <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const code = btn.parentElement.querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            
+            const originalText = btn.textContent;
+            btn.textContent = 'Скопировано!';
+            btn.style.background = '#4aed88';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 1500);
+        });
+    });
 
-    <script src="js/main.js"></script>
-    <script src="js/widgets.js"></script>
+    document.querySelectorAll('details').forEach((detail, index) => {
+        detail.style.animationDelay = `${index * 0.1}s`;
+    });
+
+    document.querySelectorAll('h1, h2, h3, h4').forEach((heading, index) => {
+        heading.style.animationDelay = `${index * 0.1}s`;
+    });
+
+    // Переключение тем
+    const themes = {
+        dark: {
+            '--bg-color': '#1a1b26',
+            '--text-color': '#a9b1d6',
+            '--accent-color': '#7aa2f7',
+            '--code-bg': '#24283b'
+        },
+        light: {
+            '--bg-color': '#ffffff',
+            '--text-color': '#2c3e50',
+            '--accent-color': '#3498db',
+            '--code-bg': '#f5f6fa'
+        },
+        colorful: {
+            '--bg-color': '#2c3e50',
+            '--text-color': '#ecf0f1',
+            '--accent-color': '#e74c3c',
+            '--code-bg': '#34495e'
+        }
+    };
+
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const theme = themes[btn.dataset.theme];
+            if (theme) {
+                Object.entries(theme).forEach(([key, value]) => {
+                    document.documentElement.style.setProperty(key, value);
+                });
+            }
+        });
+    });
+    </script>
 </body>
 </html> 
