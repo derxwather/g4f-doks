@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G4F - Документация</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link href="https://fonts.cdnfonts.com/css/benzin-bold" rel="stylesheet">
     <style>
         :root {
             --bg-color: #1a1b26;
@@ -98,24 +99,30 @@
 
         .theme-switcher {
             display: flex;
-            gap: 0.5em;
+            gap: 1em;
             flex-wrap: wrap;
-            margin: 1em 0;
+            margin: 2em auto;
+            justify-content: center;
+            max-width: 600px;
         }
 
         .theme-btn {
             background: var(--accent-color);
             border: none;
             color: var(--bg-color);
-            padding: 0.5em 1em;
-            border-radius: 4px;
+            padding: 0.8em 2em;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
+            font-family: 'Benzin Bold', sans-serif;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .theme-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         p {
@@ -236,14 +243,15 @@
         }
 
         header h1 {
-            font-size: 2.5em;
+            font-family: 'Benzin Bold', sans-serif;
+            font-size: 3em;
             margin: 0;
             padding: 1em 0;
             text-align: center;
             opacity: 1;
             transform: none;
-            letter-spacing: 1px;
-            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         @keyframes glow {
@@ -299,6 +307,11 @@
 
         .hero-image:hover {
             transform: scale(1.02);
+        }
+
+        h2, h3, h4 {
+            font-family: 'Benzin Bold', sans-serif;
+            letter-spacing: 1px;
         }
     </style>
 </head>
