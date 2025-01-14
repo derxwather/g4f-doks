@@ -313,6 +313,61 @@
             font-family: 'Benzin Bold', sans-serif;
             letter-spacing: 1px;
         }
+
+        .intro-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 2em;
+            margin: 2em auto;
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+        }
+
+        .intro-section p:first-child {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 2em;
+            text-align: center;
+            font-family: 'Benzin Bold', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5em;
+            margin-top: 2em;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5em;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        .feature-title {
+            font-family: 'Benzin Bold', sans-serif;
+            color: var(--accent-color);
+            margin: 0.5em 0;
+            font-size: 1.2em;
+        }
+
+        .feature-description {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -329,14 +384,35 @@
         <img src="Без имени.jpg" alt="G4F Logo" class="hero-image">
         
         <div class="intro-section">
-            <p>G4F (GPT4Free) - это мощная библиотека для работы с различными языковыми моделями и генерации изображений. Она предоставляет бесплатный доступ к множеству AI-моделей через разные провайдеры.</p>
-            <p>С помощью G4F вы можете:</p>
-            <ul>
-                <li>Использовать ChatGPT и другие языковые модели бесплатно</li>
-                <li>Генерировать изображения через Bing, Prodia и другие сервисы</li>
-                <li>Выбирать из множества провайдеров для разных задач</li>
-                <li>Легко интегрировать AI в свои проекты</li>
-            </ul>
+            <p>🌟 G4F (GPT4Free) - это мощная библиотека для работы с различными языковыми моделями и генерации изображений. Она предоставляет бесплатный доступ к множеству AI-моделей через разные провайдеры.</p>
+            
+            <h2>✨ С помощью G4F вы можете:</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">Бесплатный ChatGPT</div>
+                    <div class="feature-description">Используйте ChatGPT и другие продвинутые языковые модели абсолютно бесплатно</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-title">Генерация изображений</div>
+                    <div class="feature-description">Создавайте уникальные изображения через Bing, Prodia и другие мощные сервисы</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-title">Множество провайдеров</div>
+                    <div class="feature-description">Выбирайте из широкого списка провайдеров для разных задач и потребностей</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Простая интеграция</div>
+                    <div class="feature-description">Легко интегрируйте AI в свои проекты с помощью простого и понятного API</div>
+                </div>
+            </div>
         </div>
 
         <div class="install-section">
