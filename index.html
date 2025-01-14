@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G4F - Документация</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
         :root {
             --bg-color: #1a1b26;
@@ -43,9 +44,16 @@
             border-radius: 8px;
             margin: 1em 0;
             border: 1px solid var(--border-color);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.6s ease forwards;
+            transition: all 0.3s ease;
+        }
+
+        details[open] summary ~ * {
+            animation: sweep .3s ease-in-out;
+        }
+
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-10px)}
+            100%  {opacity: 1; transform: translateY(0)}
         }
 
         summary {
@@ -56,9 +64,9 @@
         }
 
         pre {
-            background: var(--code-bg);
-            padding: 1em;
-            border-radius: 8px;
+            background: var(--code-bg) !important;
+            padding: 1em !important;
+            border-radius: 8px !important;
             overflow-x: auto;
             position: relative;
             margin: 1em 0;
@@ -81,6 +89,7 @@
             cursor: pointer;
             opacity: 0;
             transition: opacity 0.3s;
+            z-index: 10;
         }
 
         pre:hover .copy-btn {
@@ -109,32 +118,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        details[open] {
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .install-section {
-            margin: 2em 0;
-        }
-
         p {
             margin: 1em 0;
         }
@@ -154,6 +137,70 @@
             color: var(--accent-color);
             position: absolute;
             left: -1em;
+        }
+
+        /* Кастомизация Prism */
+        :not(pre) > code[class*="language-"],
+        pre[class*="language-"] {
+            background: var(--code-bg) !important;
+        }
+
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: #6272a4;
+        }
+
+        .token.punctuation {
+            color: #f8f8f2;
+        }
+
+        .token.property,
+        .token.tag,
+        .token.constant,
+        .token.symbol,
+        .token.deleted {
+            color: #ff79c6;
+        }
+
+        .token.boolean,
+        .token.number {
+            color: #bd93f9;
+        }
+
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted {
+            color: #50fa7b;
+        }
+
+        .token.operator,
+        .token.entity,
+        .token.url,
+        .language-css .token.string,
+        .style .token.string {
+            color: #f8f8f2;
+        }
+
+        .token.atrule,
+        .token.attr-value,
+        .token.keyword {
+            color: #ff79c6;
+        }
+
+        .token.function,
+        .token.class-name {
+            color: #ffb86c;
+        }
+
+        .token.regex,
+        .token.important,
+        .token.variable {
+            color: #f1fa8c;
         }
     </style>
 </head>
@@ -324,63 +371,68 @@ if __name__ == "__main__":
         </details>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <script>
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const code = btn.parentElement.querySelector('code').textContent;
-            navigator.clipboard.writeText(code);
-            
-            const originalText = btn.textContent;
-            btn.textContent = 'Скопировано!';
-            btn.style.background = '#4aed88';
-            
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = '';
-            }, 1500);
+        // Обновляем все блоки кода для подсветки синтаксиса
+        document.querySelectorAll('pre code').forEach(block => {
+            block.className = 'language-python';
         });
-    });
 
-    document.querySelectorAll('details').forEach((detail, index) => {
-        detail.style.animationDelay = `${index * 0.1}s`;
-    });
+        // Копирование кода
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.parentElement.querySelector('code').textContent;
+                navigator.clipboard.writeText(code);
+                
+                const originalText = btn.textContent;
+                btn.textContent = 'Скопировано!';
+                btn.style.background = '#4aed88';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 1500);
+            });
+        });
 
-    document.querySelectorAll('h1, h2, h3, h4').forEach((heading, index) => {
-        heading.style.animationDelay = `${index * 0.1}s`;
-    });
+        // Анимация заголовков
+        document.querySelectorAll('h1, h2, h3, h4').forEach((heading, index) => {
+            heading.style.animationDelay = `${index * 0.1}s`;
+        });
 
-    // Переключение тем
-    const themes = {
-        dark: {
-            '--bg-color': '#1a1b26',
-            '--text-color': '#a9b1d6',
-            '--accent-color': '#7aa2f7',
-            '--code-bg': '#24283b'
-        },
-        light: {
-            '--bg-color': '#ffffff',
-            '--text-color': '#2c3e50',
-            '--accent-color': '#3498db',
-            '--code-bg': '#f5f6fa'
-        },
-        colorful: {
-            '--bg-color': '#2c3e50',
-            '--text-color': '#ecf0f1',
-            '--accent-color': '#e74c3c',
-            '--code-bg': '#34495e'
-        }
-    };
-
-    document.querySelectorAll('.theme-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const theme = themes[btn.dataset.theme];
-            if (theme) {
-                Object.entries(theme).forEach(([key, value]) => {
-                    document.documentElement.style.setProperty(key, value);
-                });
+        // Переключение тем
+        const themes = {
+            dark: {
+                '--bg-color': '#1a1b26',
+                '--text-color': '#a9b1d6',
+                '--accent-color': '#7aa2f7',
+                '--code-bg': '#24283b'
+            },
+            light: {
+                '--bg-color': '#ffffff',
+                '--text-color': '#2c3e50',
+                '--accent-color': '#3498db',
+                '--code-bg': '#f5f6fa'
+            },
+            colorful: {
+                '--bg-color': '#2c3e50',
+                '--text-color': '#ecf0f1',
+                '--accent-color': '#e74c3c',
+                '--code-bg': '#34495e'
             }
+        };
+
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = themes[btn.dataset.theme];
+                if (theme) {
+                    Object.entries(theme).forEach(([key, value]) => {
+                        document.documentElement.style.setProperty(key, value);
+                    });
+                }
+            });
         });
-    });
     </script>
 </body>
 </html> 
