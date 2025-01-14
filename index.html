@@ -202,6 +202,38 @@
         .token.variable {
             color: #f1fa8c;
         }
+
+        details h2, 
+        details h3, 
+        details h4 {
+            opacity: 1;
+            transform: none;
+            animation: none;
+        }
+
+        details[open] h2,
+        details[open] h3,
+        details[open] h4 {
+            animation: sweep .3s ease-in-out;
+        }
+
+        /* Стили для g4f */
+        .token.g4f-keyword {
+            color: #ff79c6 !important;
+            font-weight: bold;
+        }
+
+        .token.g4f-function {
+            color: #50fa7b !important;
+        }
+
+        .token.g4f-property {
+            color: #8be9fd !important;
+        }
+
+        .token.g4f-provider {
+            color: #bd93f9 !important;
+        }
     </style>
 </head>
 <body>
@@ -374,9 +406,20 @@ if __name__ == "__main__":
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <script>
+        // Подсветка g4f
+        Prism.languages.python = {
+            ...Prism.languages.python,
+            'g4f-keyword': /\b(?:g4f)\b/,
+            'g4f-function': /\b(?:ChatCompletion\.create|debug\.logging|debug\.version|debug\.request_timeout|debug\.proxies)\b/,
+            'g4f-property': /\b(?:model|provider|messages|stream|temperature|top_p|max_tokens|role|content)\b/,
+            'g4f-provider': /\b(?:Provider\.[A-Za-z]+|ChatgptEs|Bing|Prodia|Flux)\b/
+        };
+
         // Обновляем все блоки кода для подсветки синтаксиса
         document.querySelectorAll('pre code').forEach(block => {
             block.className = 'language-python';
+            // Принудительно обновляем подсветку
+            Prism.highlightElement(block);
         });
 
         // Копирование кода
