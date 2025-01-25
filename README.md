@@ -15,7 +15,7 @@ import g4f
 
 # Устанавливаем провайдера
 g4f.debug.logging = True  # Включаем логи
-provider = g4f.Provider.ChatgptEs 
+provider = g4f.Provider.ChatGptEs
 
 # Отправляем запрос
 response = g4f.ChatCompletion.create(
